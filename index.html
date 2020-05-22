@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Past Life Regression Test</title>
+    <script>
+        var quiz = [{
+      "Question":"What do you find hard to tolerate in other people?",
+      "Image" : "https://s3-us-west-1.amazonaws.com/tryinteract-uploads/592664c7da115a001172e159/_30120d50-4109-11e7-a2e0-4d161b0d8666.jpg",
+      "Answers" : [
+        "Recklessness and unpredictability.",
+        "Raunchiness, sleaziness and/or too much sexuality.",
+        "Indecisiveness, vagueness and/or self-deprecation.",
+        "Misanthropy or bitterness.",
+        "Domineering, argumentative and/or dull people.",
+        "Narrow-mindedness and/or dishonesty.",
+        "Self-righteousness and/or self-pity.",
+        "I can tolerate anything people throw at me."
+      ]
+    },
+    {
+      "Question":"What is your favorite color ?",
+      "Image" : "https://s3-us-west-1.amazonaws.com/tryinteract-uploads/592664c7da115a001172e159/_7c499e40-4109-11e7-a2e0-4d161b0d8666.jpg",
+      "Answers" : [
+        "Red",
+        "Orange",
+        "Yellow",
+        "Green",
+        "Blue",
+        "Indigo",
+        "Violet"
+      ]
+    },
+    {
+      "Question":"Think back to the nightmares you've had in life. What is the most common theme?",
+      "Image" : "https://s3-us-west-1.amazonaws.com/tryinteract-uploads/592664c7da115a001172e159/_d46f1410-4109-11e7-a2e0-4d161b0d8666.jpg",
+      "Answers" : [
+        "Falling or being chased.",
+        "Being completely naked in a public setting.",
+        "Being injured.",
+        "Being betrayed or hurt by a loved one.",
+        "Being trapped.",
+        "Being lost.",
+        "Dying."
+      ]
+    },
+    {
+      "Question":"What health issues have you chronically experienced?",
+      "Image" : "https://s3-us-west-1.amazonaws.com/tryinteract-uploads/592664c7da115a001172e159/_14883a40-410a-11e7-a2e0-4d161b0d8666.jpg",
+      "Answers" : [
+        "Obesity, digestive issues and/or problems with your legs and feet.",
+        "Lower back pain, kidney, urinary, prostrate and/or menstruation issues.",
+        "Chronic fatigue, high blood pressure or diabetes.",
+        "Asthma, allergies, heart problems and/or upper back pain.",
+        "Sinus infections, thyroid malfunction, teeth and/or neck issues.",
+        "Hormone imbalance, headaches, insomnia and/or anxiety.",
+        "Depression, fibromyalgia and/or degenerative diseases.",
+        "None of these or one that isn't listed."
+      ]
+    },
+    {
+      "Question":"Describe yourself as a child ...",
+      "Image" : "https://s3-us-west-1.amazonaws.com/tryinteract-uploads/592664c7da115a001172e159/_59eca990-410a-11e7-a2e0-4d161b0d8666.jpg",
+      "Answers" : [
+        "Family-orientated and unsettled by change.",
+        "Sassy and creative.",
+        "Nervous, shy and gentle.",
+        "Caring but emotionally touchy.",
+        "Artistic and self-expressive.",
+        "Dreamy and intelligent.",
+        "I felt much older than my young age reflected."
+      ]
+    },
+    {
+      "Question":"Which of the following thoughts scares you the most?",
+      "Image" : "https://s3-us-west-1.amazonaws.com/tryinteract-uploads/592664c7da115a001172e159/_9ad83af0-410a-11e7-a2e0-4d161b0d8666.jpg",
+      "Answers" : [
+        "Not having any family or friends.",
+        "Being an immoral person.",
+        "Being a nobody who amounts to nothing.",
+        "Being abused or mistreated by those I love and trust.",
+        "Never being understood or appreciated.",
+        "Living a lie and believing a lie for my entire life.",
+        "Feeling empty and depressed."
+      ]
+    },
+    {
+      "Question":"What Enneagram type are you?",
+      "Image" : "https://s3-us-west-1.amazonaws.com/tryinteract-uploads/592664c7da115a001172e159/_9ad83af0-410a-11e7-a2e0-4d161b0d8666.jpg",
+      "Answers" :[
+        "Number 6 (The Loyalist) or Number 8 (The Challenger).",
+        "Number 7 (The Enthusiast).",
+        "Number 1 (The Reformer) or Number 3 (The Achiever).",
+        "Number 2 (The Helper).",
+        "Number 4 (The Individualist).",
+        "Number 5 (The Investigator).",
+        "Number 9 (The Peacemaker).",
+        "I don't know."
+      ]
+    },
+    {
+      "Question":"What kind of unexplainable symptoms of neurosis have you dealt with, or currently experience the most?",
+      "Image" : "https://s3-us-west-1.amazonaws.com/tryinteract-uploads/592664c7da115a001172e159/_71b25dd0-410b-11e7-a2e0-4d161b0d8666.jpg",
+      "Answers" :[
+        "Obsessiveness and/or anger management issues.",
+        "Being frigid and/or extremely reserved.",
+        "Chronic anxiety and/or low self-esteem.",
+        "Excessive self-sacrifice (codependency).",
+        "Perfectionism and/or workaholism.",
+        "ADD/ADHD (difficulty in staying focused).",
+        "Depression.",
+        "None of these, or one that isn't listed."
+      ]
+    }
+    ];
+
+    function animate({duration, draw, timing}) {
+
+  let start = performance.now();
+
+  requestAnimationFrame(function animate(time) {
+    let timeFraction = (time - start) / duration;
+    if (timeFraction > 1) timeFraction = 1;
+
+    let progress = timing(timeFraction)
+
+    draw(progress);
+
+    if (timeFraction < 1) {
+      requestAnimationFrame(animate);
+    }
+
+  });
+}
+  </script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Past Life Regression Test</h2>
+        <div class="panel panel-default">
+            <div class="panel-heading Question_bb"></div>
+            <progress id="elem" style="display: none;"></progress>
+            <div class="panel-body Answer_bb">
+                <img id="my_image"src="#" class="img-thumbnail" alt="Images" width="50%" height="30%">
+                <div id="masterradio"></div>
+                <!-- <div class="radio">
+                    <label><input type="radio" name="answer_answer" value="1">Yes</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="answer_answer" value="0">No</label>
+                </div> -->
+            </div>
+            <!-- <button type="button" class="btn btn-primary quiz_bb" style="margin-left: 10px;margin-bottom: 10px;"></button> -->
+            <button type="button" class="btn btn-success Done_bb" style="margin-left: 10px;margin-bottom: 10px;display:none;">Done</button>
+        </div>
+        <div class="alert alert-info" style="display: none;">
+            <strong>Thank You</strong> for the participation !
+        </div>
+    </div>
+    <script>
+    $(document).ready(function() {
+
+        var i = 0;
+        rrbefore = '<div class="radio"><label><input type="radio" name="answer_answer" value="';
+        rrafter  = '</label></div>';
+
+        function init() {
+            $(".Question_bb").html(quiz[0]['Question']);
+            $("#my_image").attr("src",quiz[0]['Image']);
+            for(x= 0; x< quiz[0]['Answers'].length; x++){
+                $("#masterradio").append(rrbefore + x +'">'+quiz[0]['Answers'][x] + rrafter);
+            }
+            /*$(".quiz_bb").html("Next Question");
+            $(".Q_number").html(i + 1);*/
+        }
+        init();
+        var radioValue = [];
+        var result_value = [];
+        $(".Done_bb").click(function() {
+            $(".panel").hide();
+            $(".alert-info").show();
+        });
+        //$("button.quiz_bb").click(function(){
+        $(".radio input[name='answer_answer']").click(function() {
+
+            radioValue[i] = $('.radio input:radio:checked').val();
+
+            result_value.push(radioValue[i]);
+            console.log(result_value);
+            $(".radio input[name='answer_answer']").prop('checked', false);
+            i++;
+            if (i < quiz.length) {
+
+                $(".Question_bb").html(quiz[i]['Question']);
+                $("#my_image").attr("src",quiz[i]['Image']);
+                $( "#masterradio" ).empty();
+                for(x= 0; x< quiz[i]['Answers'].length; x++){
+                $("#masterradio").append(rrbefore + x +'">'+quiz[i]['Answers'][x] + rrafter);
+                }
+            } 
+            else if (i == quiz.length) {
+                totalScore = 0;
+                $(".quiz_bb").hide();
+                $(".Question_bb").html("Total Score");
+                $(".Done_bb").show();
+                for (x = 0; x < radioValue.length; x++) {
+                    totalScore += parseInt(radioValue[x]);
+                }
+                $(".Answer_bb").html('<h1>' + (totalScore * 10) + "%</h1>");
+                $("#elem").show();
+                animate({
+                    duration: 1000,
+                    timing: function(timeFraction) {
+                        return timeFraction;
+                    },
+                    draw: function(progress) {
+                        elem.style.width = progress * (totalScore * 10) + '%';
+                    }
+                });
+            }
+        });
+
+
+
+    });
+    </script>
+</body>
+
+</html>
