@@ -391,7 +391,7 @@
                                                                     $("#my_image").attr("src", "https://raw.githubusercontent.com/prabha-coder/leaderboard/master/answer.jpg");
                                                                     $(".radio").hide();
                                                                     for (v = 0; v < result_value.length; v++) {
-                                                                        $("#masteranswer").append(result_value[v] + "<br>");
+                                                                        $("#masteranswer").append('<div class="alert alert-info">'+result_value[v] + "</div>");
                                                                     }
                                                                 });
 
