@@ -147,16 +147,19 @@
             <div class="panel-heading Question_bb"></div>
             <progress id="elem" style="display: none;"></progress>
             <div class="panel-body Answer_bb">
-                <img id="my_image"src="#" class="img-thumbnail" alt="Images" width="50%" height="30%">
-                <div id="masterradio"></div>
-                <!-- <div class="radio">
-                    <label><input type="radio" name="answer_answer" value="1">Yes</label>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" name="answer_answer" value="0">No</label>
-                </div> -->
+                <img id="my_image" src="#" class="img-thumbnail" alt="Images" width="50%" height="30%">
+                <div id="masteranswer"></div>
+                <div id="0" class="radio"></div>
+                <div id="1" class="radio"></div>
+                <div id="2" class="radio"></div>
+                <div id="3" class="radio"></div>
+                <div id="4" class="radio"></div>
+                <div id="5" class="radio"></div>
+                <div id="6" class="radio"></div>
+                <div id="7" class="radio"></div>
+                <div id="8" class="radio"></div>
+                <div id="9" class="radio"></div>
             </div>
-            <!-- <button type="button" class="btn btn-primary quiz_bb" style="margin-left: 10px;margin-bottom: 10px;"></button> -->
             <button type="button" class="btn btn-success Done_bb" style="margin-left: 10px;margin-bottom: 10px;display:none;">Done</button>
         </div>
         <div class="alert alert-info" style="display: none;">
@@ -164,20 +167,27 @@
         </div>
     </div>
     <script>
-    $(document).ready(function() {
-
+    $(function() {
         var i = 0;
-        rrbefore = '<div class="radio"><label><input type="radio" name="answer_answer" value="';
-        rrafter  = '</label></div>';
+        rrbefore = '<label><input type="radio" name="answer_answer" value="';
+        rrafter = '</label>';
 
         function init() {
+            $("#elem").show();
+            animate({
+                duration: 500,
+                timing: function(timeFraction) {
+                    return timeFraction;
+                },
+                draw: function(progress) {
+                    elem.style.width = progress * 12.5 + '%';
+                }
+            });
             $(".Question_bb").html(quiz[0]['Question']);
-            $("#my_image").attr("src",quiz[0]['Image']);
-            for(x= 0; x< quiz[0]['Answers'].length; x++){
-                $("#masterradio").append(rrbefore + x +'">'+quiz[0]['Answers'][x] + rrafter);
+            $("#my_image").attr("src", quiz[0]['Image']);
+            for (x = 0; x < quiz[0]['Answers'].length; x++) {
+                $("#" + x).html(rrbefore + quiz[0]['Answers'][x] + '">' + quiz[0]['Answers'][x] + rrafter);
             }
-            /*$(".quiz_bb").html("Next Question");
-            $(".Q_number").html(i + 1);*/
         }
         init();
         var radioValue = [];
@@ -186,9 +196,9 @@
             $(".panel").hide();
             $(".alert-info").show();
         });
-        //$("button.quiz_bb").click(function(){
-        $(".radio input[name='answer_answer']").click(function() {
 
+        $(".radio input[name='answer_answer']").click(function(e) {
+            console.log("clicked");
             radioValue[i] = $('.radio input:radio:checked').val();
 
             result_value.push(radioValue[i]);
@@ -197,36 +207,236 @@
             i++;
             if (i < quiz.length) {
 
-                $(".Question_bb").html(quiz[i]['Question']);
-                $("#my_image").attr("src",quiz[i]['Image']);
-                $( "#masterradio" ).empty();
-                for(x= 0; x< quiz[i]['Answers'].length; x++){
-                $("#masterradio").append(rrbefore + x +'">'+quiz[i]['Answers'][x] + rrafter);
-                }
-            } 
-            else if (i == quiz.length) {
-                totalScore = 0;
-                $(".quiz_bb").hide();
-                $(".Question_bb").html("Total Score");
-                $(".Done_bb").show();
-                for (x = 0; x < radioValue.length; x++) {
-                    totalScore += parseInt(radioValue[x]);
-                }
-                $(".Answer_bb").html('<h1>' + (totalScore * 10) + "%</h1>");
-                $("#elem").show();
                 animate({
-                    duration: 1000,
+                    duration: 200,
                     timing: function(timeFraction) {
                         return timeFraction;
                     },
                     draw: function(progress) {
-                        elem.style.width = progress * (totalScore * 10) + '%';
+                        elem.style.width = progress * 25 + '%';
                     }
                 });
+                $(".Question_bb").html(quiz[i]['Question']);
+                $("#my_image").attr("src", quiz[i]['Image']);
+                $(".radio").empty();
+
+                for (x = 0; x < quiz[i]['Answers'].length; x++) {
+                    $("#" + x).html(rrbefore + quiz[i]['Answers'][x] + '">' + quiz[i]['Answers'][x] + rrafter);
+                }
+                $(".radio input[name='answer_answer']").click(function(e) {
+                    console.log("clicked");
+                    radioValue[i] = $('.radio input:radio:checked').val();
+
+                    result_value.push(radioValue[i]);
+                    console.log(result_value);
+                    $(".radio input[name='answer_answer']").prop('checked', false);
+                    i++;
+                    if (i < quiz.length) {
+                        animate({
+                            duration: 200,
+                            timing: function(timeFraction) {
+                                return timeFraction;
+                            },
+                            draw: function(progress) {
+                                elem.style.width = progress * 37.5 + '%';
+                            }
+                        });
+
+                        $(".Question_bb").html(quiz[i]['Question']);
+                        $("#my_image").attr("src", quiz[i]['Image']);
+                        $(".radio").empty();
+
+                        for (x = 0; x < quiz[i]['Answers'].length; x++) {
+                            $("#" + x).html(rrbefore + quiz[i]['Answers'][x] + '">' + quiz[i]['Answers'][x] + rrafter);
+                        }
+                        $(".radio input[name='answer_answer']").click(function(e) {
+                            console.log("clicked");
+                            radioValue[i] = $('.radio input:radio:checked').val();
+
+                            result_value.push(radioValue[i]);
+                            console.log(result_value);
+                            $(".radio input[name='answer_answer']").prop('checked', false);
+                            i++;
+                            if (i < quiz.length) {
+                                animate({
+                                    duration: 200,
+                                    timing: function(timeFraction) {
+                                        return timeFraction;
+                                    },
+                                    draw: function(progress) {
+                                        elem.style.width = progress * 50 + '%';
+                                    }
+                                });
+
+
+                                $(".Question_bb").html(quiz[i]['Question']);
+                                $("#my_image").attr("src", quiz[i]['Image']);
+                                $(".radio").empty();
+
+                                for (x = 0; x < quiz[i]['Answers'].length; x++) {
+                                    $("#" + x).html(rrbefore + quiz[i]['Answers'][x] + '">' + quiz[i]['Answers'][x] + rrafter);
+                                }
+                                $(".radio input[name='answer_answer']").click(function(e) {
+                                    console.log("clicked");
+                                    radioValue[i] = $('.radio input:radio:checked').val();
+
+                                    result_value.push(radioValue[i]);
+                                    console.log(result_value);
+                                    $(".radio input[name='answer_answer']").prop('checked', false);
+                                    i++;
+                                    if (i < quiz.length) {
+                                        animate({
+                                            duration: 200,
+                                            timing: function(timeFraction) {
+                                                return timeFraction;
+                                            },
+                                            draw: function(progress) {
+                                                elem.style.width = progress * 62.5 + '%';
+                                            }
+                                        });
+
+
+                                        $(".Question_bb").html(quiz[i]['Question']);
+                                        $("#my_image").attr("src", quiz[i]['Image']);
+                                        $(".radio").empty();
+
+                                        for (x = 0; x < quiz[i]['Answers'].length; x++) {
+                                            $("#" + x).html(rrbefore + quiz[i]['Answers'][x] + '">' + quiz[i]['Answers'][x] + rrafter);
+                                        }
+                                        $(".radio input[name='answer_answer']").click(function(e) {
+                                            console.log("clicked");
+                                            radioValue[i] = $('.radio input:radio:checked').val();
+
+                                            result_value.push(radioValue[i]);
+                                            console.log(result_value);
+                                            $(".radio input[name='answer_answer']").prop('checked', false);
+                                            i++;
+                                            if (i < quiz.length) {
+                                                animate({
+                                                    duration: 200,
+                                                    timing: function(timeFraction) {
+                                                        return timeFraction;
+                                                    },
+                                                    draw: function(progress) {
+                                                        elem.style.width = progress * 75 + '%';
+                                                    }
+                                                });
+
+                                                $(".Question_bb").html(quiz[i]['Question']);
+                                                $("#my_image").attr("src", quiz[i]['Image']);
+                                                $(".radio").empty();
+
+                                                for (x = 0; x < quiz[i]['Answers'].length; x++) {
+                                                    $("#" + x).html(rrbefore + quiz[i]['Answers'][x] + '">' + quiz[i]['Answers'][x] + rrafter);
+                                                }
+                                                $(".radio input[name='answer_answer']").click(function(e) {
+                                                    console.log("clicked");
+                                                    radioValue[i] = $('.radio input:radio:checked').val();
+
+                                                    result_value.push(radioValue[i]);
+                                                    console.log(result_value);
+                                                    $(".radio input[name='answer_answer']").prop('checked', false);
+                                                    i++;
+                                                    if (i < quiz.length) {
+                                                        animate({
+                                                            duration: 200,
+                                                            timing: function(timeFraction) {
+                                                                return timeFraction;
+                                                            },
+                                                            draw: function(progress) {
+                                                                elem.style.width = progress * 87.5 + '%';
+                                                            }
+                                                        });
+
+                                                        $(".Question_bb").html(quiz[i]['Question']);
+                                                        $("#my_image").attr("src", quiz[i]['Image']);
+                                                        $(".radio").empty();
+
+                                                        for (x = 0; x < quiz[i]['Answers'].length; x++) {
+                                                            $("#" + x).html(rrbefore + quiz[i]['Answers'][x] + '">' + quiz[i]['Answers'][x] + rrafter);
+                                                        }
+                                                        $(".radio input[name='answer_answer']").click(function(e) {
+                                                            console.log("clicked");
+                                                            radioValue[i] = $('.radio input:radio:checked').val();
+
+                                                            result_value.push(radioValue[i]);
+                                                            console.log(result_value);
+                                                            $(".radio input[name='answer_answer']").prop('checked', false);
+                                                            i++;
+                                                            if (i < quiz.length) {
+                                                                animate({
+                                                                    duration: 200,
+                                                                    timing: function(timeFraction) {
+                                                                        return timeFraction;
+                                                                    },
+                                                                    draw: function(progress) {
+                                                                        elem.style.width = progress * 100 + '%';
+                                                                    }
+                                                                });
+
+                                                                $(".Question_bb").html(quiz[i]['Question']);
+                                                                $("#my_image").attr("src", quiz[i]['Image']);
+                                                                $(".radio").empty();
+
+                                                                for (x = 0; x < quiz[i]['Answers'].length; x++) {
+                                                                    $("#" + x).html(rrbefore + quiz[i]['Answers'][x] + '">' + quiz[i]['Answers'][x] + rrafter);
+                                                                }
+                                                                $(".radio input[name='answer_answer']").click(function(e) {
+                                                                    console.log("clicked");
+                                                                    radioValue[i] = $('.radio input:radio:checked').val();
+
+                                                                    result_value.push(radioValue[i]);
+                                                                    console.log(result_value);
+                                                                    $(".Question_bb").html("Your Answers");
+                                                                    $("#my_image").attr("src", "https://raw.githubusercontent.com/prabha-coder/leaderboard/master/answer.jpg");
+                                                                    $(".radio").hide();
+                                                                    for (v = 0; v < result_value.length; v++) {
+                                                                        $("#masteranswer").append(result_value[v] + "<br>");
+                                                                    }
+                                                                });
+
+                                                            }
+                                                        });
+
+                                                    }
+                                                });
+
+                                            }
+                                        });
+
+                                    }
+                                });
+
+                            }
+                        });
+
+                    }
+                });
+
+
             }
+            /*else if (i == quiz.length) {
+                           totalScore = 0;
+                           $(".quiz_bb").hide();
+                           $(".Question_bb").html("Total Score");
+                           $(".Done_bb").show();
+                           for (x = 0; x < radioValue.length; x++) {
+                               totalScore += parseInt(radioValue[x]);
+                           }
+                           $(".Answer_bb").html('<h1>' + (totalScore * 10) + "%</h1>");
+                           $("#elem").show();
+                           animate({
+                               duration: 1000,
+                               timing: function(timeFraction) {
+                                   return timeFraction;
+                               },
+                               draw: function(progress) {
+                                   elem.style.width = progress * (totalScore * 10) + '%';
+                               }
+                           });
+                       }*/
+
         });
-
-
 
     });
     </script>
